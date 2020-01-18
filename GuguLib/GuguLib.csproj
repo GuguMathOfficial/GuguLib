@@ -8,8 +8,4 @@
     <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Algorithms\Seqences\" />
-  </ItemGroup>
-
 </Project>
