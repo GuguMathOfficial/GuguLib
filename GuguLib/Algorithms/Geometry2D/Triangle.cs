@@ -13,19 +13,27 @@ namespace GuguLib.Algorithms.Geometry2D
         /// <param name="b">Side b</param>
         /// <param name="c">Side c</param>
         /// <returns>The side of a triangle</returns>
-        public static double FindSide(char side, double perimeter, double a = 0, double b = 0, double c = 0)
+        [Controllable]
+        public static Controlled<double, ArgumentException> FindSide(char side, double perimeter, double a = 0, double b = 0, double c = 0)
         {
+            var ctrl = new Controlled<double, ArgumentException>();
             switch (side)
             {
                 case 'a':
-                    return perimeter - b - c;
+                    ctrl.ReturnValue = perimeter - b - c;
+                    break;
                 case 'b':
-                    return perimeter - a - c;
+                    ctrl.ReturnValue = perimeter - a - c;
+                    break;
                 case 'c':
-                    return perimeter - a - b;
+                    ctrl.ReturnValue = perimeter - a - b;
+                    break;
                 default:
-                    throw new ArgumentException("Invalid character");
+                    ctrl.Exception = new ArgumentException("Invalid character");
+                    break;
             }
+
+            return ctrl;
         }
 
         /// <summary>

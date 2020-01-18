@@ -14,13 +14,15 @@ namespace GuguLib
         /// <param name="den">Store the denominator as ref variable</param>
         /// <param name="symbol">The symbol used to calculate the fraction</param>
         /// <returns>The calculated fraction</returns>
-        public static double CalculateFraction(double[] numerator, int[] denominator, ref double num, ref double den, char symbol = '+')
+        [Controllable]
+        public static Controlled<double, ArgumentException> CalculateFraction(double[] numerator, int[] denominator, ref double num, ref double den, char symbol = '+')
         {
+            var ctrl = new Controlled<double, ArgumentException>();
             double result = 0;
             double commonDenominator = 1;
 
             if (numerator.Length > denominator.Length || numerator.Length < denominator.Length)
-                throw new ArgumentException("Not enough numerators or denominators");
+                ctrl.Exception = new ArgumentException("Not enough numerators or denominators");
 
             if (symbol == '+' || symbol == '-')
             {
@@ -55,12 +57,13 @@ namespace GuguLib
                     }
             }
             else
-                throw new ArgumentException("Not a valid symbol set");
+                ctrl.Exception = new ArgumentException("Not a valid symbol set");
 
             num = result;
             den = commonDenominator;
 
-            return result / commonDenominator;
+            ctrl.ReturnValue = result / commonDenominator;
+            return ctrl;
         }
 
         /// <summary>

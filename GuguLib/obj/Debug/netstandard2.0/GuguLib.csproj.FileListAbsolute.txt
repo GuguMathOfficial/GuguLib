@@ -1,0 +1,8 @@
+D:\dev\cs\GUGU\GuguLib\GuguLib\bin\Debug\netstandard2.0\GuguLib.deps.json
+D:\dev\cs\GUGU\GuguLib\GuguLib\bin\Debug\netstandard2.0\GuguLib.dll
+D:\dev\cs\GUGU\GuguLib\GuguLib\bin\Debug\netstandard2.0\GuguLib.pdb
+D:\dev\cs\GUGU\GuguLib\GuguLib\obj\Debug\netstandard2.0\GuguLib.csprojAssemblyReference.cache
+D:\dev\cs\GUGU\GuguLib\GuguLib\obj\Debug\netstandard2.0\GuguLib.AssemblyInfoInputs.cache
+D:\dev\cs\GUGU\GuguLib\GuguLib\obj\Debug\netstandard2.0\GuguLib.AssemblyInfo.cs
+D:\dev\cs\GUGU\GuguLib\GuguLib\obj\Debug\netstandard2.0\GuguLib.dll
+D:\dev\cs\GUGU\GuguLib\GuguLib\obj\Debug\netstandard2.0\GuguLib.pdb

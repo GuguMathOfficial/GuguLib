@@ -15,10 +15,13 @@ namespace GuguLib.Algorithms.Seqences
         /// <param name="bot">Elements on the bot bottom</param>
         /// <param name="sum">Array of both equals</param>
         /// <returns>The sequence's answer</returns>            
-        public static string Sequence(double[] top, double[] bot, double[] sum) // It only works with a1 elements for now. Ex. (a3+a6=8 | a2-a7=16)
+        [Controllable]
+        public static Controlled<string, ArgumentException> Sequence(double[] top, double[] bot, double[] sum) // It only works with a1 elements for now. Ex. (a3+a6=8 | a2-a7=16)
         {
+            var ctrl = new Controlled<string, ArgumentException>();
+
             if (sum.Length != 2) // Checks of the sum array has only 2 elements
-                throw new ArgumentException("The sum can have only 2 elements");
+                ctrl.Exception = new ArgumentException("The sum can have only 2 elements");
 
             double denD = 0, numD = 0;
             double numA = 0, denA = 0;
@@ -26,30 +29,32 @@ namespace GuguLib.Algorithms.Seqences
 
             CalculateSequence(top, bot, sum, ref numA, ref denA, ref numD, ref denD);
 
-            if (numA % denA == 0 && numD % denD == 0) // Checks if you can devide the numbers and if you can it devides them and returns the answer.
+            if (numA % denA == 0 && numD % denD == 0) // Checks if you can devide the numbers and if you can it devides them and ctrl.ReturnValue =s the answer.
             {
                 a = numA / denA;
                 d = numD / denD;
-                return "a = " + a + " d = " + d;
+                ctrl.ReturnValue = $"a = {a} d = {d}";
             }
             else if (numA % denA == 0 && numD % denD != 0)
             {
                 a = numA / denA;
                 Fractions.Shorten(ref numD, ref denD);
-                return "a = " + a + " d = " + numD + "/" + denD;
+                ctrl.ReturnValue = $"a = {a} + d =  {numD}/{denD}";
             }
             else if (numA % denA != 0 && numD % denD == 0)
             {
                 d = numD / denD;
                 Fractions.Shorten(ref numA, ref denA);
-                return "a = " + numA + "/" + denA + " d = " + d;
+                ctrl.ReturnValue = $"a = {numA}/{denA} d = {d}";
             }
             else
             {
                 Fractions.Shorten(ref numD, ref denD);
                 Fractions.Shorten(ref numA, ref denA);
-                return "a = " + numA + "/" + denA + " d = " + numD + "/" + denD;
+                ctrl.ReturnValue = $"a = {numA}/{denA } d = {numD}/{denD}";
             }
+
+            return ctrl;
         }
 
         /// <summary>

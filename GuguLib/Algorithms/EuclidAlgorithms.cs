@@ -30,19 +30,29 @@ namespace GuguLib.Algorithms
         /// </summary>
         /// <param name="numbers">Array of numbers that we want to find their GreatestCommonDivider</param>
         /// <returns>The GreatestCommonDivider</returns>
-        public static double GreatestCommonDivider(params double[] numbers)
+        [Controllable]
+        public static Controlled<double, ArgumentException> GreatestCommonDivider(params double[] numbers)
         {
+            var ctrl = new Controlled<double, ArgumentException>();
             if (numbers == null)
-                throw new ArgumentNullException();
+                ctrl.Exception = new ArgumentNullException();
             else if (numbers.Length == 1)
-                return numbers[0];
+            {
+                ctrl.ReturnValue = numbers[0];
+                return ctrl;
+            }
             else if (numbers.Length == 2)
-                return GreatestCommonDivider(numbers[0], numbers[1]);
+            {
+                ctrl.ReturnValue = GreatestCommonDivider(numbers[0], numbers[1]);
+                return ctrl;
+            }
             else
                 for (int i = 1; i < numbers.Length; i++)
                     numbers[i] = GreatestCommonDivider(Math.Round(numbers[i - 1], 0), Math.Round(numbers[i], 0));
 
-            return (numbers[numbers.Length - 1]);
+            ctrl.ReturnValue = numbers[numbers.Length - 1];
+
+            return ctrl;
         }
 
         /// <summary>
@@ -109,19 +119,28 @@ namespace GuguLib.Algorithms
         /// </summary>
         /// <param name="numbers">Array of the numbers we are searching the LeastCommonMultiple of</param>
         /// <returns>The LeastCommonMultiple</returns>
-        public static double LeastCommonMultiple(params double[] numbers)
+        [Controllable]
+        public static Controlled<double, ArgumentNullException> LeastCommonMultiple(params double[] numbers)
         {
+            var ctrl = new Controlled<double, ArgumentNullException>();
             if (numbers == null)
-                throw new ArgumentNullException();
+                ctrl.Exception = new ArgumentNullException();
             else if (numbers.Length == 1)
-                return numbers[0];
+            {
+                ctrl.ReturnValue = numbers[0];
+                return ctrl;
+            }
             else if (numbers.Length == 2)
-                return LeastCommonMultiple(numbers[0], numbers[1]);
+            {
+                ctrl.ReturnValue = LeastCommonMultiple(numbers[0], numbers[1]);
+                return ctrl;
+            }
             else
                 for (int i = 1; i < numbers.Length; i++)
                     numbers[i] = LeastCommonMultiple(Math.Round(numbers[i - 1], 0), Math.Round(numbers[i], 0));
 
-            return numbers[numbers.Length - 1];
+            ctrl.ReturnValue = numbers[numbers.Length - 1];
+            return ctrl;
         }
     }
 }
