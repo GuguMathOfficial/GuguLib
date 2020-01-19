@@ -1,0 +1,52 @@
+  List<char> SaveSigns = new List<char>(); 
+            List<int> SaveIndexes = new List<int>();
+            string ToTest = "a7+a5+a2";
+            char[] SaveStringToChar = ToTest.ToCharArray();
+            char[] SaveNumbersToCharArray = ToTest.Where(x => Char.IsDigit(x)).ToArray();
+            for (int i = 0; i < SaveStringToChar.Length; i++)
+            {
+                switch (SaveStringToChar[i])
+                {
+                    case '+': SaveSigns.Add('+'); break;
+                    case '-': SaveSigns.Add('-'); break;
+                }
+            }
+            string newResult = "";
+            int IndexOfSign = 0;
+            for (int i = 0; i < SaveNumbersToCharArray.Length; i++)
+            {
+                if (IndexOfSign == SaveSigns.Count)
+                {
+                    newResult += $"{SaveSigns[IndexOfSign - 1]}a1q^{int.Parse(SaveNumbersToCharArray[i].ToString()) - 1}";
+                    break;
+                }
+                else
+                {
+                    newResult += $"{SaveSigns[IndexOfSign]}a1q^{int.Parse(SaveNumbersToCharArray[i].ToString()) - 1}";
+                    IndexOfSign++;
+                }
+            }
+            char[] GetOnlyQInNewResult = newResult.Replace("a1","").Where(x => Char.IsDigit(x)).ToArray();
+
+
+            MessageBox.Show(newResult);
+            int[] Aint = Array.ConvertAll(GetOnlyQInNewResult, c => (int)Char.GetNumericValue(c));
+            string LastStep = "";
+            IndexOfSign = 0;
+
+            for (int i = 0; i < Aint.Length; i++)
+            {
+                if (IndexOfSign == SaveSigns.Count)
+                {
+                    LastStep += $"{SaveSigns[IndexOfSign - 1]}q^{(int.Parse(SaveNumbersToCharArray[i].ToString())-1) - Aint.Min()}";
+                    break;
+                }
+                else
+                {
+                    LastStep += $"{SaveSigns[IndexOfSign]}q^{(int.Parse(SaveNumbersToCharArray[i].ToString())-1) - Aint.Min()}";
+                }
+                IndexOfSign++;
+
+
+                 }
+                MessageBox.Show("a1q^"+GetOnlyQInNewResult.Min().ToString()+"("+LastStep.Replace("q^0","1")+")");
