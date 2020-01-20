@@ -9,9 +9,11 @@ namespace circle
     abstract class Shape
     {
         private double radius;
-        private double diameter;
         private double height;
-        protected double r
+        /// <summary>
+        /// set Radius
+        /// </summary>
+        protected double R
         {
             set
             {
@@ -23,19 +25,10 @@ namespace circle
                 return radius;
             }
         }
-        protected double d
-        {
-            set
-            {
-                if (value >= 0)
-                { diameter = value; }
-            }
-            get
-            {
-                return diameter;
-            }
-        }
-        protected double h
+        /// <summary>
+        /// set height
+        /// </summary>
+        protected double H
         {
             set
             {
@@ -49,11 +42,10 @@ namespace circle
         }
         public const double PI = Math.PI;
         
-        private Shape(double r, double d,double h)
+        private Shape(double r,double h)
         {
-            this.r = r;
-            this.d = d;
-            this.h = h;
+            r = R;
+            h = H;
         }
         public abstract double Area();
     }
