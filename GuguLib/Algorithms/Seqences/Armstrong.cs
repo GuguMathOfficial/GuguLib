@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GuguLib.Algorithms.Seqences
 {
@@ -33,6 +31,7 @@ namespace GuguLib.Algorithms.Seqences
             for (int i = 0; i < arr.Length; i++)
                 if (IsArmstrong(arr[i]) != true)
                     return false;
+
             return true;
         }
 
